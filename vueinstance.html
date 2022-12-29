@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Vue Instance</title>
+</head>
+
+<body>
+  <div class="app">
+    <p v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">{{ name }}</p>
+    <p>{{ name.split(' ') }}</p>
+    <p>age: {{ 19+4 }}</p>
+    <p>{{ boleam? 'saw':'ma saw' }}</p>
+    <h1>
+      i am <span v-bind:title="name">saw</span>
+    </h1>
+    <!--<img :src="img" alt="" :class="boleam ? rotate: border">-->
+    <img :src="img" alt="" :class="{ border:boleam }">
+    <!--<div v-bind:class="{ active: isActive }"></div>-->
+    <a :href="link">link</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script>
+    let app = new Vue({
+      el: '.app',
+      data: {
+        name: 'saw kyaw myint',
+        img: 'img/one.jpg',
+        rotate: 'rotate',
+        border: 'border',
+        activeColor: 'red',
+        link: 'https://v2.vuejs.org/v2/guide/class-and-style.html',
+        fontSize: 30,
+        boleam: true,
+      }
+    });
+
+  </script>
+</body>
+
+</html>

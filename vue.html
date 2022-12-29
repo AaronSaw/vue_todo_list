@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue js</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{ message }}</p>
+        <h1>{{ message }}</h1>
+        <input type="text" v-model.number="message">
+
+        <ul v-for="(item, index) in items">
+            <button @click="item.stock+=1">add</button>
+            <input type="text" v-model="item.stock">
+            <button @click="item.stock-=1">minus</button>
+            <li>{{ item.name }}</li>
+        </ul>
+        <p>total : "{{ totalstock }}"</p>
+        <button @click="run()">method</button>
+        <hr>
+        <br>
+        <input type="text" v-model="name">
+        <input type="number" v-model="stock">
+        <button @click="add()">add</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                message: "saw kyaw myint",
+                title: "nay chi lin",
+                items: [
+                    { id: 0, name: 'book', stock: 0 },
+                    { id: 1, name: 'pens', stock: 1 },
+                    { id: 2, name: 'ruller', stock: 0 },
+                ],
+                name:'',
+                stock:'',
+            },
+            computed: {
+                totalstock: function () {
+                    return this.items.reduce((sum, el) => sum + el.stock, 0)
+                }
+            },
+            methods: {
+                run(){
+                    alert('saw')
+                },
+                add(){
+                 let newitem={
+                    id:this.items.length+1,
+                    name:this.name,
+                    stock:parseInt(this.stock)
+                }
+                this.items.push(newitem)
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

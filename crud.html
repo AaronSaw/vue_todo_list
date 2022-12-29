@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <title>Document</title>
+</head>
+
+<style>
+     .done{
+          text-decoration: line-through !important;
+     }
+</style>
+<body>
+     <center>
+          <div class="w-25 mt-4" id="app">
+               <p>total : {{ doneTotal }}</p>
+               <div class="d-flex">
+                    
+                    <input type="text" class="form-control" v-model="newmessage" @keyup.enter="create()">
+                    <button class="btn btn-primary" @click="create()">add</button>
+               </div>
+               <ul>
+
+                    <div class="d-flex" v-for="(list, index) in lists" :key="index">
+                         <li>
+                              <input v-if="list.edit" type="text" class="form-control" @keyup.enter="list.edit =false"  v-model="list.message">
+                              <div  v-else class="">
+                              <input type="checkbox" class="custom-control-input" v-model="list.isdone" :id="'customCheckout'+list.id">
+                              <label for="" :class="['custom-control-label',{'done':list.isdone}]" @dblclick="list.edit = true">{{ list.message }}</label>
+                         </div>
+                              <a v-if="list.edit == false" class=" btn btn-sm btn-outline-danger" @click="del(list.id)">del</a>
+                         </li>
+                    </div>
+
+               </ul>
+          </div>
+     </center>
+     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+     <script>
+          let app = new Vue({
+               el: '#app',
+               data: {
+                    currentid: 0,
+                    newmessage: '',
+                    lists: [],
+               },
+               computed:{
+              doneTotal(){
+               return this.lists.filter(el=> el.isdone ==true).length;
+              }
+               },
+               methods: {
+
+                    create() {
+                         this.currentid++
+                          this.lists.push({
+                              id: this.currentid,
+                              message: this.newmessage,
+                              isdone:false,
+                              edit:false,
+                         });
+                         this.newmessage ='';
+                    },
+
+                    del(x) {
+                         if(confirm('are u sure delete')){
+                              this.lists=this.lists.filter(el=>el.id !==x);
+                         }                       
+                        return this.lists;
+                    }
+               },
+          })
+     </script>
+</body>
+
+</html>

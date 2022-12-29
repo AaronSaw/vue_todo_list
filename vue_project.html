@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Document</title>
+</head>
+<body class="bg-secondary">
+  <center>
+  <div class="mt-4 col-12 col-lg-3 col-md-12  shadow" id="app">
+  <div class="card" style="background-color: whitesmoke;">
+    <div class="card-body">
+    <p class="p-4 border">
+{{ result }}
+    </p>
+    <div class=" row mt-3">
+      <div class="col-6">
+        <input type="text" class="form-control" placeholder="input 1" v-model.number="input1">
+      </div>
+      <div class="col-6">
+        <input type="text" class="form-control" placeholder="input 2" v-model.number="input2">
+      </div>
+    </div>
+    <div class="row mt-2 col-12">
+      <div class="col-6">
+            <button @click="run()" class="btn btn-outline-primary">calculate</button>
+      </div>
+      <div class="col-6">
+        <button @click="save()" class="btn btn-outline-primary">save</button>
+      </div>
+    </div>
+    <ul>
+      <li v-for="(item, index) in history" :key="index">
+        {{ item }}
+      </li>
+    </ul>
+    </div>
+  </div>
+  </div>
+  </center>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script>
+    let app=new Vue({
+      el:'#app',
+      data:{
+       result:0,
+       input1:0,
+       input2:0,
+       history:[],
+      },
+      methods: {
+        run(){
+  return this.result = `${this.input1}+${this.input2}= ${this.input1+this.input2}`;
+        },
+        save(){
+    return this.history.push(this.result);
+        }
+      },
+    })
+  </script>
+</body>
+</html>
